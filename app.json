@@ -1,34 +1,12 @@
 {
+  "name": "Lend-An-Ear-App",
+  "displayName": "Lend-An-Ear-App",
   "expo": {
-    "name": "LendAnEar2",
-    "slug": "LendAnEar2",
+    "name": "Lend-An-Ear-App",
+    "slug": "Lend-An-Ear-App",
     "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
-    "userInterfaceStyle": "automatic",
-    "splash": {
-      "image": "./assets/images/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
     "assetBundlePatterns": [
       "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      }
-    },
-    "web": {
-      "favicon": "./assets/images/favicon.png"
-    }
+    ]
   }
 }
