@@ -4,6 +4,7 @@ import { Camera } from 'expo-camera';
 import { Button } from 'react-native-paper';
 import * as FileSystem from 'expo-file-system';
 import * as Speech from 'expo-speech';
+import ISO6391 from 'iso-639-1'; // library to get language code
 
 
 const CameraScreen = () => {
@@ -20,7 +21,9 @@ const CameraScreen = () => {
   // Variable to translate to and read out loud! We would change this with our voice recognition.
   // ISO639 form is required by our endpoint - https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
   // BCP47 form is required by our text to speech front end function - https://appmakers.dev/bcp-47-language-codes-list/
-  var desiredLanguageISO639 = "hi";
+  var lang = 'Hindi'; //This is lanague selection
+  // get language code from the language slection
+  var desiredLanguageISO639 = ISO6391.getCode(lang); 
   var desiredLanguageBCP47 = "hi-IN";
 
   // Called at the Launch of App to Request Permission
