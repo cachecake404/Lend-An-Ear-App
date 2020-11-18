@@ -2,7 +2,7 @@ from Base64Manager import *
 from google.cloud import vision
 import os
 
-#image_string = encode_image("test_image.jpg")
+image_string = encode_image("test_image.jpg")
 #os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "lendAnEarCred.json"
 
 def convert_image_to_text(image_string):
@@ -15,4 +15,7 @@ def convert_image_to_text(image_string):
     response = client.text_detection(image=image)
     texts = response.text_annotations
     return texts[0].description
+
+convert_image_to_text(image_string)
+
 
