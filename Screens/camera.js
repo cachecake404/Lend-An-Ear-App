@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { Camera } from 'expo-camera';
-import { Button } from 'react-native-paper';
+import { Button } from 'react-native';
 import * as FileSystem from 'expo-file-system';
 import * as Speech from 'expo-speech';
 import ISO6391 from 'iso-639-1'; // library to get language code
@@ -107,18 +107,15 @@ const CameraScreen = () => {
   // Main View that is returned assuming we get correct camera permissions.
   return (
     <View style={{ flex: 1 }}>
-      <Button mode="contained" style={styles.buttonContainer} onPress={() => {languageSelectionButtonFunction();}}>
-        Language Select 
+      <Button style={styles.buttonContainer} onPress={() => {languageSelectionButtonFunction();}} title = "Language Select ">   
       </Button>
       
       <Camera style={{ flex: 0.8 }} type={type} ref={(ref) => { camera = ref }}></Camera>
 
-      <Button style={styles.buttonContainer} mode="contained" onPress={() => {scanButtonFunction();}}>
-        SCAN
+      <Button style={styles.buttonContainer} onPress={() => {scanButtonFunction();}} title = "SCAN">
       </Button>
     </View>
   );
-
 }
 
 export default CameraScreen;
