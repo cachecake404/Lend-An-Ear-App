@@ -10,5 +10,6 @@ def decode_data(base64str):
 
 ##import pyperclip
 ##pyperclip.copy(encode_data("test_image.jpg"))
+##pyperclip.copy(encode_data("japanese.wav"))
 
 
