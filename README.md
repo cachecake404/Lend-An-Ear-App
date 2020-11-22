@@ -10,5 +10,6 @@ Make sure you have yarn, npm and expo installed.
 
 ### Then run the commands:
 yarn install
+
 expo start
 
