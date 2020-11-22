@@ -1,4 +1,4 @@
-# Lend An Ear App
+# Lend An Eye
 
 An application designed for the visually impaired to read text out loud from the real world in the lanugage of choice.
 
