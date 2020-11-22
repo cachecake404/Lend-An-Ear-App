@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, Vibration } from 'react-native';
 import { Camera } from 'expo-camera';
-import { Button } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import * as FileSystem from 'expo-file-system';
 import * as Speech from 'expo-speech';
 import { Audio } from 'expo-av';
@@ -32,7 +32,7 @@ const CameraScreen = () => {
     android: {
       extension: ".mp3",
       outputFormat: Audio.RECORDING_OPTION_ANDROID_AUDIO_ENCODER_AMR_WB,
-      audioEncoder: Audio.RECORDING_OPTION_ANDROID_OUTPUT_FORMAT_AMR_WB,
+      audioEncoder: Audio.RECORDING_OPTION_ANDROID_OUTPUT_FORMAT_MPEG_4,
       sampleRate: 16000,
     },
     ios: {
@@ -43,14 +43,6 @@ const CameraScreen = () => {
     }
   };
   
-  // Styles for this Screen
-  const styles = StyleSheet.create({
-    buttonContainer: {
-      flex:0.2, 
-      justifyContent: 'center'
-    }
-  });
-
   // Called at the Launch of App to Request Permission
   useEffect(() => {
     (async () => {
@@ -77,8 +69,11 @@ const CameraScreen = () => {
   var reacordAudio = async () => {
     const recording = new Audio.Recording();
     await recording.prepareToRecordAsync(recordingOptions);
+    Vibration.vibrate();
+    await sleep(500);
+    Vibration.cancel();
     await recording.startAsync();
-    await sleep(3000);
+    await sleep(4000);
     const data = await recording.stopAndUnloadAsync();
     var fileBase64String = await FileSystem
     .readAsStringAsync(recording.getURI(), { encoding: FileSystem.EncodingType.Base64 })
@@ -91,6 +86,7 @@ const CameraScreen = () => {
     console.log(translated_text);
     languageChoice = translated_text
     desiredLanguageISO639 = ISO6391.getCode(languageChoice);
+    Speech.speak(languageChoice);
   }
   
   // This function takes the picture then calls the onPictureSaved function
@@ -103,6 +99,7 @@ const CameraScreen = () => {
   // Then reads out the text!
   var onPictureSaved = async photo => {  
       Speech.speak("Scanning please wait!");
+      Vibration.vibrate();
       // Load image from filesystem in string Base64 form
       var fileBase64String = await FileSystem
       .readAsStringAsync(photo.uri, { encoding: FileSystem.EncodingType.Base64 })
@@ -136,11 +133,25 @@ const CameraScreen = () => {
   // Main View that is returned assuming we get correct camera permissions.
   return (
     <View style={{ flex: 1 }}>
-      <Button style={styles.buttonContainer} onPress={() => {languageSelectionButtonFunction();}} title = "Language Select ">   
-      </Button>
+      <View style={{flex:0.2}}>
+      <TouchableOpacity onPress = {() => {languageSelectionButtonFunction();}}>
+      <View style = {{backgroundColor: 'purple', alignItems: 'center', 
+                      justifyContent: 'center', height:"100%"}}
+            >
+          <Text style = {{color: 'white'}}>LANGUAGE SELECT RECORD</Text>
+      </View>
+      </TouchableOpacity>  
+      </View>
       <Camera style={{ flex: 0.6 }} type={type} ref={(ref) => { camera = ref }}></Camera>
-      <Button style={styles.buttonContainer} onPress={() => {scanButtonFunction();}} title = "SCAN">
-      </Button>
+      <View style={{flex:0.2}}>
+      <TouchableOpacity onPress = {() => {scanButtonFunction();}}>
+      <View style = {{backgroundColor: 'purple', alignItems: 'center', 
+                      justifyContent: 'center', height:"100%"}}
+            >
+          <Text style = {{color: 'white'}}>SCAN</Text>
+      </View>
+      </TouchableOpacity>
+      </View>  
     </View>
   );
 }
