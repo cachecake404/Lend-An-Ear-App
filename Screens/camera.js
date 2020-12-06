@@ -4,8 +4,10 @@ import { Camera } from 'expo-camera';
 import { TouchableOpacity } from 'react-native';
 import * as FileSystem from 'expo-file-system';
 import * as Speech from 'expo-speech';
+import * as ImageManipulator from 'expo-image-manipulator';
 import { Audio } from 'expo-av';
 import ISO6391 from 'iso-639-1'; 
+
 
 const CameraScreen = () => {
 
@@ -100,6 +102,13 @@ const CameraScreen = () => {
   var onPictureSaved = async photo => {  
       Speech.speak("Scanning please wait!");
       Vibration.vibrate();
+      // Compress Image
+      photo = await ImageManipulator.manipulateAsync(
+        photo.uri,
+        [],
+        { compress: 0.2, format: ImageManipulator.SaveFormat.JPEG }
+      );
+      
       // Load image from filesystem in string Base64 form
       var fileBase64String = await FileSystem
       .readAsStringAsync(photo.uri, { encoding: FileSystem.EncodingType.Base64 })
