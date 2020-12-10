@@ -100,7 +100,7 @@ const CameraScreen = () => {
   // Then calls the translator endpoint to translate text.
   // Then reads out the text!
   var onPictureSaved = async photo => {  
-      Speech.speak("Scanning please wait!");
+      Speech.speak("Translating, please wait!");
       Vibration.vibrate();
       // Compress Image
       photo = await ImageManipulator.manipulateAsync(

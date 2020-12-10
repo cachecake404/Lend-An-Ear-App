@@ -1,12 +1,15 @@
 {
-  "name": "Lend-An-Ear-App",
-  "displayName": "Lend-An-Ear-App",
+  "name": "Lend-An-Eye-App",
+  "displayName": "Lend-An-Eye-App",
   "expo": {
-    "name": "Lend-An-Ear-App",
-    "slug": "Lend-An-Ear-App",
+    "name": "Lend-An-Eye-App",
+    "slug": "Lend-An-Eye-App",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "android": {
+      "package": "com.tk377299.LendAnEyeApp"
+    }
   }
 }
